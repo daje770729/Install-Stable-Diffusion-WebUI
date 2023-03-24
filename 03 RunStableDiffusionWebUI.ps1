@@ -1,4 +1,4 @@
-$DestPath = "D:\Derek\"
+$DestPath = "D:\"
 Set-Location -Path $DestPath
 
 #################
