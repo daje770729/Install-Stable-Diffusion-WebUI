@@ -16,8 +16,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.We
 choco install git -y
 # Install conda
 choco install anaconda3 -y
-Set-ItemProperty -Path 'HKCU:\Environment' -Name 'conda_script' -Value '%USERPROFILE%\anaconda3\Scripts'
-Set-ItemProperty -Path 'HKCU:\Environment' -Name 'conda' -Value '%USERPROFILE%\anaconda3'
-Set-ItemProperty -Path 'HKCU:\Environment' -Name 'conda_library' -Value '%USERPROFILE%\anaconda3\Library\bin'
+# Add Anaconda3 to user enviment varible "Path"
+$anacondaScriptsPath = "C:\tools\anaconda3\Scripts"
+$anacondaHomePath = "C:\tools\anaconda3"
+$anacondaLibraryBinPath = "C:\tools\anaconda3\Library\bin"
+$currentPath = [Environment]::GetEnvironmentVariable('Path', 'User')
+$newPath = "$currentPath;$anacondaScriptsPath;$anacondaHomePath;$anacondaLibraryBinPath"
+[Environment]::SetEnvironmentVariable('Path', $newPath, 'User')
 
 Read-Host -Prompt "Press Enter to exit"
